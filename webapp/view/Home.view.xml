@@ -1,0 +1,45 @@
+<mvc:View controllerName="sapips.training.mockserviceexercise.controller.Home" xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" xmlns="sap.m" xmlns:form="sap.ui.layout.form">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Panel id="idPanel3" headerText="Aggregation Binding" class="sapUiResponsiveMargin" width="auto">
+                <List items="{ProductsModel>/Products}" mode="SingleSelectMaster" selectionChange="onSelectProduct">
+                    <items>
+                        <ObjectListItem title="{ProductsModel>ProductName}" number="{ parts: [ {path: 'ProductsModel>UnitPrice'}, 
+                                                           {path: 'ProductsModel>CurrencyCode'} ], 
+                                                type: 'sap.ui.model.type.Currency', 
+                                                formatOptions: { showMeasure: false } }" numberUnit="{/CurrencyCode}">
+                            <ObjectAttribute text="QuantityPerUnit" />
+                            <ObjectAttribute title="{i18n>currStockValue}" 
+                                             text="{ parts: [ {path: 'ProductsModel>UnitPrice'}, 
+                                                              {path: 'ProductsModel>UnitsInStock'}, 
+                                                              {path: '/CurrencyCode'} ], 
+                                                     formatter: '.formatter.formatStockValue' }" />
+                        </ObjectListItem>
+                    </items>
+                </List>
+            </Panel>
+            <Panel id="idPanel4" headerText="Product Details" class="sapUiResponsiveMargin">
+                <form:SimpleForm id="idProductDetails">
+                    <Label text="ProductId" />
+                    <Input value="{ProductsModel>ProductID}" />
+
+                    <Label text="ProductName" />
+                    <Input value="{ProductsModel>ProductName}" />
+
+                    <Label text="QuantityPerUnit" />
+                    <Input value="{ProductsModel>QuantityPerUnit}" />
+
+                    <Label text="UnitPrice" />
+                    <Input value="{ProductsModel>UnitPrice}" />
+
+                    <Label text="UnitsInStock" />
+                    <Input value="{ProductsModel>UnitsInStock}" />
+                    
+                    <Label text="Discontinued" />
+                    <Input value="{ProductsModel>Discontinued}" />
+                </form:SimpleForm>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
